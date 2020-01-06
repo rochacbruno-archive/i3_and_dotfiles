@@ -1,0 +1,10 @@
+if pgrep -x "quassel" > /dev/null
+then
+    i3-msg '[class="quassel"] move scratchpad' &
+    i3-msg '[class="quassel"] scratchpad show' &
+else
+    quassel &
+    sleep 10 &
+    i3-msg '[class="quassel"] move scratchpad' &
+    i3-msg '[class="quassel"] scratchpad show' &
+fi

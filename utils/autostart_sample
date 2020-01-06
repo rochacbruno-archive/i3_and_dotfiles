@@ -1,0 +1,120 @@
+#!/bin/sh
+
+# Packages you need to install on Fedora in order to get this setup:
+# dnf install i3lock dmenu dunst network-manager-applet workrave stardict numlockx feh \
+# scrot f\*-backgrounds-base f\*-backgrounds-extras-base
+
+# Also using:
+# https://github.com/Tomas-M/xlunch
+
+# Wait for program coming up
+wait_for_program () {
+  n=0
+  while true
+  do
+    # PID of last background command
+    if xdotool search --onlyvisible --pid $! 2>/dev/null; then
+      break
+    else
+      if [ $n -eq 200 ]; then
+        notify-send -u critical "Error during start: last program $! did not started fast enough"
+        break
+      else
+        n=`expr $n + 1`
+        sleep 0.1
+      fi
+    fi
+  done
+}
+
+## Configure panel from left side
+PRIM_OUT=DP-1
+SEC_OUT=DVI-D-1
+xrandr --output $SEC_OUT --mode 1280x1024 --right-of $PRIM_OUT --output $PRIM_OUT --mode 2560x1440
+
+## Merge Xresources
+xrdb -merge ~/.Xresources &
+
+## Desktop background or picture
+#xsetroot -solid '#101010' &
+feh --bg-fill $(find /usr/share/backgrounds -type f -name \*jpg -o -name \*.png | shuf -n 1)
+
+## Terminal daemon
+TERMINAL=xterm
+
+## Load samples for volume keys feedback
+pactl upload-sample ~/.i3/that_was_easy.wav that_was_easy &
+pactl upload-sample ~/.i3/volume_blip.wav volume_blip &
+pactl upload-sample ~/.i3/mute.wav mute &
+pactl upload-sample ~/.i3/speak.wav speak &
+
+## Disable beeps
+xset -b &
+
+## Keybord layout setting
+setxkbmap -layout cz,us -option grp:shift_shift_toggle &
+
+## C-A-Backspace to kill X
+#setxkbmap -option terminate:ctrl_alt_bksp &
+
+## Turns on the numlock key in X11
+numlockx on &
+
+## DPMS monitor setting (standby -> suspend -> off) (seconds)
+xset dpms 600 1200 2000 &
+
+## Set LCD brightness
+xbacklight -set 100 &
+
+## Gamma correction through the X server
+#xgamma -gamma 1.1 &
+
+## Mouse and trackball setup
+~/bin/configure-input-devices >/dev/null 2>&1 &
+
+## OSD
+LC_ALL=C dunst &
+
+## Setup workspaces and terminals
+for w in 1 2 3 4; do
+  i3-msg "workspace $w; move workspace to output $PRIM_OUT"
+  $TERMINAL &
+  wait_for_program
+  i3-msg split h
+  $TERMINAL &
+  wait_for_program
+  i3-msg split v
+  i3-msg "focus left; split v"
+  #i3-msg "move workspace to output $DP"
+done
+
+i3-msg workspace 5
+i3-msg layout tabbed
+~/bin/chrome &
+
+for w in 6 7 8 9 10; do
+  i3-msg "workspace $w; move workspace to output $SEC_OUT"
+done
+
+## Start apps with defined workspaces
+i3-msg "workspace 6"
+$TERMINAL -e weechat-curses &
+
+## Refresh
+xrefresh &
+
+## Special keys
+sleep 4s && xmodmap /home/lzap/.Xmodmap &
+
+## Start taskbar utils
+LC_ALL=C parcellite &>/dev/null &
+LC_ALL=C nm-applet &>/dev/null &
+LC_ALL=C workrave &>/dev/null &
+#LC_ALL=C dropbox start &>/dev/null &
+
+## Update launcher cache
+bash /home/lzap/work/xlunch/extra/genconf > /home/lzap/.xlunch/icons.conf 2>/dev/null &
+#dmenu_path >/dev/null &
+
+## Good work :-)
+exit 0

@@ -1,0 +1,14 @@
+.vscode
+venv
+.venv
+venv*
+.venv*
+pulp_2_tests/__init__*
+./pulp_2_tests/__init__.py
+/pulp_2_tests/__init__.py
+*pulp_2_tests/__init__.py
+.pytest_cache
+__pycache__
+.envrc
+.noseids
+nosetests.xml

@@ -1,0 +1,13 @@
+#!/bin/sh
+
+# Set numlock on
+numlockx &
+
+## Keybord layout setting
+#setxkbmap -layout cz,us -option grp:shift_shift_toggle &
+ 
+localectl set-keymap us-intl &
+localectl set-x11-keymap us intl &
+
+# Set intl keyboard and turn caps locl into esc
+setxkbmap -layout us -variant intl -option caps:escape &

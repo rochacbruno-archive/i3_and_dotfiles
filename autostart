@@ -1,0 +1,20 @@
+#!/bin/sh
+
+## Desktop background color
+#xsetroot -solid '#101010' &
+
+## Set startup volume
+pactl set-sink-volume 0 '20%' &
+
+## Disable beeps
+xset -b &
+
+## DPMS monitor setting (standby -> suspend -> off) (seconds)
+#xset dpms 300 600 900 &
+
+## Set LCD brightness
+xbacklight -set 90 &
+
+## Set keyboard
+setxkbmap -layout us -variant intl -option caps:escape &
+./keyboard &

@@ -1,0 +1,31 @@
+<?xml encoding="UTF-8" version="1.0"?>
+<actions>
+<action>
+	<icon>utilities-terminal</icon>
+	<name>Open Terminal Here</name>
+	<unique-id>1489031570327353-1</unique-id>
+	<command>exo-open --working-directory %f --launch TerminalEmulator</command>
+	<description>Example for a custom action</description>
+	<patterns>*</patterns>
+	<startup-notify/>
+	<directories/>
+</action>
+<action>
+	<icon>view-restore-symbolic</icon>
+	<name>Resize</name>
+	<unique-id>1506369879057390-1</unique-id>
+	<command>~/Projects/misc/thunar-actions/image_resizer.sh %F</command>
+	<description>Resize image</description>
+	<patterns>*</patterns>
+	<image-files/>
+</action>
+<action>
+	<icon>image-bmp</icon>
+	<name>Send to imgur</name>
+	<unique-id>1534184717037589-2</unique-id>
+	<command>~/Projects/misc/thunar-actions/upload-to-imgur.sh -f %f</command>
+	<description></description>
+	<patterns>*</patterns>
+	<image-files/>
+</action>
+</actions>
