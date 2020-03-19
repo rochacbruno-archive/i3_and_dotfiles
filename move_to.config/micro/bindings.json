@@ -1,0 +1,15 @@
+{
+    "Alt-/": "lua:comment.comment",
+    "Alt-a": "lua:snippets.Accept",
+    "Alt-b": "lua:initlua.build",
+    "Alt-d": "lua:snippets.Cancel",
+    "Alt-f": "lua:initlua.format",
+    "Alt-i": "lua:initlua.repl",
+    "Alt-l": "lua:initlua.lint",
+    "Alt-s": "lua:snippets.Insert",
+    "Alt-t": "lua:initlua.test",
+    "Alt-w": "lua:snippets.Next",
+    "Alt-y": "lua:initlua.sort_imports",
+    "CtrlBackslash": "VSplit",
+    "F3": "lua:filemanager.toggle_tree"
+}

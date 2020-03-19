@@ -14,8 +14,8 @@
 ########################################################################
 
 # Win key
-set $mod Mod4 
-# Alt 
+set $mod Mod4
+# Alt
 set $alt Mod1
 
 ########################################################################
@@ -166,7 +166,7 @@ bindsym XF86MonBrightnessDown exec /usr/bin/xbacklight -dec 5; exec /usr/bin/kil
 
 # reference: https://github.com/lzap/doti3/blob/master/config
 
-### Extra buttons ### 
+### Extra buttons ###
 #bindsym XF86Launch1 exec /usr/bin/aplay ~/.i3/sound/that_was_easy
 #XF86Bluetooth
 #XF86MenuKB
@@ -200,7 +200,7 @@ popup_during_fullscreen smart
 floating_modifier $mod
 
 
-# (Disabling `jkl;` as I am not a VIM user) 
+# (Disabling `jkl;` as I am not a VIM user)
 # Change focus
 #bindsym $mod+j focus left
 #bindsym $mod+k focus down
@@ -320,6 +320,7 @@ bindsym Caps_Lock nop
 # criteria scratchpad launchers
 bindsym F9 [class="quassel"] scratchpad show
 bindsym F8 [instance="typora"] scratchpad show
+#bindsym F7 [instance="Telegram"] scratchpad show
 bindsym F7 [instance="telegram-desktop"] scratchpad show
 
 # GUAKE
@@ -336,6 +337,8 @@ bindsym F12 exec --no-startup-id tilix --quake
 for_window [instance="feh"] floating enable
 for_window [instance="arandr"] floating enable
 for_window [instance="telegram-desktop"] floating enable
+for_window [instance="Telegram"] floating enable
+for_window [instance="TelegramDesktop"] floating enable
 for_window [instance="camdesk"] floating enable
 #for_window [instance="vlc"] floating enable; resize set 800 600
 for_window [title="CopyQ"] floating enable
@@ -344,9 +347,9 @@ for_window [title="pypopup"] floating enable
 
 # floating tweaks
 # window_type
-# Compare the window type (_NET_WM_WINDOW_TYPE). 
-# Possible values are 
-# normal, dialog, utility, toolbar, splash, menu, 
+# Compare the window type (_NET_WM_WINDOW_TYPE).
+# Possible values are
+# normal, dialog, utility, toolbar, splash, menu,
 # dropdown_menu, popup_menu, tooltip and notification.
 
 for_window [window_role="pop-up"] floating enable
@@ -376,6 +379,8 @@ for_window [class="(?i)pavucontrol"] floating enable, move position mouse, move 
 
 # move automatically to scratchpad when opened
 for_window [instance="telegram-desktop"] move scratchpad
+for_window [instance="Telegram"] move scratchpad
+for_window [instance="TelegramDesktop"] move scratchpad
 for_window [instance="typora"] move scratchpad
 
 # Switch to workspace with urgent window automatically
@@ -467,13 +472,13 @@ client.background       #ffffff
 # py3status
 bar {
         status_command py3status -c ~/.i3/i3status.conf
-        position top 	
+        position top
         tray_output primary
         tray_padding 1
         output primary
         #output DP1
 
-		font pango:monospace 14
+		font pango:monospace 18
 		colors {
 			background #1c1c1c
 			statusline #ffffff
@@ -489,7 +494,7 @@ bar {
 
 bar {
         status_command py3status -c ~/.i3/i3status2.conf
-        position top 	
+        position top
         tray_output primary
         tray_padding 1
         #output primary
@@ -514,11 +519,11 @@ bar {
 ########################################################################
 
 exec --no-startup-id nm-applet
-exec --no-startup-id copyq
+#exec --no-startup-id copyq
 exec --no-startup-id xfce4-clipman
-exec --no-startup-id "~/Apps/SwitchHosts\!-linux-x64/SwitchHosts\!"
-exec_always --no-startup-id kupfer --no-splash
-exec_always --no-startup-id autorandr --change
+#exec --no-startup-id "~/Apps/SwitchHosts\!-linux-x64/SwitchHosts\!"
+#exec_always --no-startup-id kupfer --no-splash
+#exec_always --no-startup-id autorandr --change
 
 #exec --no-startup-id sh -c "/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 || /usr/lib/x86_64-linux-gnu/polkit-mate/polkit-mate-authentication-agent-1" &
 
