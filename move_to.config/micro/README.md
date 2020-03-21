@@ -37,13 +37,18 @@ https://github.com/zyedidia/micro/blob/master/runtime/help/keybindings.md
 - **Ctrl+s** - Save
 - **Ctrl+o** - open
 
-### Panels
+### Splits
 
 - **Ctrl+'\\'** - Split Right
+- **Ctrl+]** - Split Left
+- **Alt+|** - New view same file on Right
+- **Ctrl+w** - Switch split
+
+### Tabs
+
 - **Ctrl+T** - New Tab
 - **Ctrl+Alt+>** - Next Tab
 - **Ctrl+Alt+<** - Prev Tab
-- **Ctrl+w** - Switch split
 
 ### Editing
 
@@ -88,6 +93,8 @@ These are some custom commands added via `~/.config/micro/init.lua` [source](...
 - **Alt+b** - build (go run, cargo play, python3)
   This will run the current file in foreground and wait until you press any
   key to return back to the editing buffer.
+- **Alt+o** - print output (go run, cargo play, python3)
+  This will run the current file in foreground show output in new bottom panel
 - **Alt+t** - Test (go test, cargo test, python3 -m pytest)
   This will run current file's test cases and wait any key to return.
 - **Alt+f** - Format (go fmt, cargo fmt, black -l 79)
