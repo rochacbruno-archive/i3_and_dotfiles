@@ -22,42 +22,29 @@ set $alt Mod1
 # Workspaces
 ########################################################################
 
-# Define names for default workspaces for which we configure key bindings later on.
-# We use variables to avoid repeating the names in multiple places.
-set $ws1 "1:one"
-set $ws2 "2:two"
-set $ws3 "3:thre"
-set $ws4 "4:four"
-set $ws5 "5:five"
-set $ws6 "6:six"
-set $ws7 "7:seven"
-set $ws8 "8:eight"
-set $ws9 "9:nine"
-set $ws10 "10:ten"
-
 # switch to workspace
-bindsym $mod+1 workspace $ws1
-bindsym $mod+2 workspace $ws2
-bindsym $mod+3 workspace $ws3
-bindsym $mod+4 workspace $ws4
-bindsym $mod+5 workspace $ws5
-bindsym $mod+6 workspace $ws6
-bindsym $mod+7 workspace $ws7
-bindsym $mod+8 workspace $ws8
-bindsym $mod+9 workspace $ws9
-bindsym $mod+0 workspace $ws10
+bindsym $mod+1 workspace number 1
+bindsym $mod+2 workspace number 2
+bindsym $mod+3 workspace number 3
+bindsym $mod+4 workspace number 4
+bindsym $mod+5 workspace number 5
+bindsym $mod+6 workspace number 6
+bindsym $mod+7 workspace number 7
+bindsym $mod+8 workspace number 8
+bindsym $mod+9 workspace number 9
+bindsym $mod+0 workspace number 10
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace $ws1; workspace $ws1
-bindsym $mod+Shift+2 move container to workspace $ws2; workspace $ws2
-bindsym $mod+Shift+3 move container to workspace $ws3; workspace $ws3
-bindsym $mod+Shift+4 move container to workspace $ws4; workspace $ws4
-bindsym $mod+Shift+5 move container to workspace $ws5; workspace $ws5
-bindsym $mod+Shift+6 move container to workspace $ws6; workspace $ws6
-bindsym $mod+Shift+7 move container to workspace $ws7; workspace $ws7
-bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
-bindsym $mod+Shift+9 move container to workspace $ws9; workspace $ws9
-bindsym $mod+Shift+0 move container to workspace $ws10; workspace $ws10
+bindsym $mod+Shift+1 move container to workspace number 1; workspace number 1
+bindsym $mod+Shift+2 move container to workspace number 2; workspace number 2
+bindsym $mod+Shift+3 move container to workspace number 3; workspace number 3
+bindsym $mod+Shift+4 move container to workspace number 4; workspace number 4
+bindsym $mod+Shift+5 move container to workspace number 5; workspace number 5
+bindsym $mod+Shift+6 move container to workspace number 6; workspace number 6
+bindsym $mod+Shift+7 move container to workspace number 7; workspace number 7
+bindsym $mod+Shift+8 move container to workspace number 8; workspace number 8
+bindsym $mod+Shift+9 move container to workspace number 9; workspace number 9
+bindsym $mod+Shift+0 move container to workspace number 10; workspace number 10
 
 # move next previous workspace
 bindsym $mod+Ctrl+Right workspace next
@@ -110,6 +97,19 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
+### Mode OBS set 1932 x 1080 ###
+mode "obs" {
+        bindsym Left resize set 1932 1080
+        bindsym Right resize set 1932 1080
+
+        # back to normal: Enter or Escape or $mod+r
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym $mod+r mode "default"
+}
+
+bindsym $mod+o mode "obs"
+
 ### Shutdown mode ###
 set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
 mode "$mode_system" {
@@ -134,7 +134,7 @@ bindsym $mod+End mode "$mode_system"
 
 ### bindings for ThinkPad keyboard ###
 
-# Dispay
+# Display
 bindsym XF86Display exec arandr
 
 ### Audio ###
@@ -303,7 +303,7 @@ bindsym --release Print exec --no-startup-id xfce4-screenshooter
 # application launchers
 
 # translate
-bindsym $mod+t exec --no-startup-id gnome-translate
+#bindsym $mod+t exec --no-startup-id gnome-translate
 #bindsym $mod+Shift+t exec --no-startup-id zenity --info --ellipsize --text="`xclip -o | /usr/bin/translate -s google -f en -t pt -`"
 # requires: zenity, xclip, translate-shell
 bindsym $mod+Shift+t exec --no-startup-id zenity --info --ellipsize --text="`xclip -o | trans -b --no-ansi -e google -f en -t pt -`"
@@ -322,6 +322,7 @@ bindsym F9 [class="quassel"] scratchpad show
 bindsym F8 [instance="typora"] scratchpad show
 #bindsym F7 [instance="Telegram"] scratchpad show
 bindsym F7 [instance="telegram-desktop"] scratchpad show
+bindsym F6 [instance="discord"] scratchpad show
 
 # GUAKE
 #toggle the dropdown
@@ -337,6 +338,8 @@ bindsym F12 exec --no-startup-id tilix --quake
 for_window [instance="feh"] floating enable
 for_window [instance="arandr"] floating enable
 for_window [instance="telegram-desktop"] floating enable
+for_window [instance="discord"] floating enable
+for_window [instance="typora"] floating enable
 for_window [instance="Telegram"] floating enable
 for_window [instance="TelegramDesktop"] floating enable
 for_window [instance="camdesk"] floating enable
@@ -379,6 +382,7 @@ for_window [class="(?i)pavucontrol"] floating enable, move position mouse, move 
 
 # move automatically to scratchpad when opened
 for_window [instance="telegram-desktop"] move scratchpad
+for_window [instance="discord"] move scratchpad
 for_window [instance="Telegram"] move scratchpad
 for_window [instance="TelegramDesktop"] move scratchpad
 for_window [instance="typora"] move scratchpad
@@ -391,19 +395,6 @@ for_window [urgent=latest] focus
 # there is abug when moving windows to scratchpad like this
 # the internal popup and dialog are also going to scratchpad
 # for_window [instance="scratchcalc"] move scratchpad
-
-### Workspace assignments ###
-# DISABLED #
-
-#assign [class="Code"] $ws1 (use wkcode)
-#assign [class="Firefox"] $ws2
-#assign [class="Geany"] $ws3
-#assign [class="Google-chrome"] $ws4
-#assign [class="CodeOSS"] $ws5 (use oscode)
-#assign [class="Gimp-2.8"] $ws6
-#assign [class="Inkscape"] $ws6
-#assign [class="Spotify"] $ws7
-
 
 ########################################################################
 # Multiple displays
@@ -459,10 +450,10 @@ client.urgent           #2f343a #900000 #ffffff #900000   #900000
 client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
 client.background       #ffffff
 
-
-# default_border pixel 1
-# default_floating_border pixel 1
-# hide_edge_borders smart
+new_window pixel 2
+default_border pixel 2
+default_floating_border pixel 2
+hide_edge_borders smart
 
 ########################################################################
 # Bar
@@ -524,6 +515,7 @@ exec --no-startup-id xfce4-clipman
 #exec --no-startup-id "~/Apps/SwitchHosts\!-linux-x64/SwitchHosts\!"
 #exec_always --no-startup-id kupfer --no-splash
 #exec_always --no-startup-id autorandr --change
+exec_always --no-startup-id $HOME/.cargo/bin/i3wsr
 
 #exec --no-startup-id sh -c "/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 || /usr/lib/x86_64-linux-gnu/polkit-mate/polkit-mate-authentication-agent-1" &
 
@@ -540,6 +532,7 @@ exec --no-startup-id 'setxkbmap -layout us -variant intl -option caps:escape'
 
 # How to send multi commands?
 # i3-msg 'exec "echo foo > /tmp/bar; echo bar > /tmp/baz"'
+
 
 ########################################################################
 # EOF

@@ -36,6 +36,8 @@ https://github.com/zyedidia/micro/blob/master/runtime/help/keybindings.md
 
 - **Ctrl+s** - Save
 - **Ctrl+o** - open
+- **F3** - File Manager
+- **F4** - Fzf
 
 ### Splits
 
@@ -73,7 +75,7 @@ https://github.com/zyedidia/micro/blob/master/runtime/help/keybindings.md
 - **Alt+Up** - Move Line or selection UP
 - **Alt+Down** - Move Line or selection DOWN
 - **Alt+Backspace** - Delete word left
-
+- **Alt j** - Join Lines in a single line
 
 ### Multi cursor
 
@@ -105,3 +107,31 @@ These are some custom commands added via `~/.config/micro/init.lua` [source](...
   Run Linters in the current file, give feedback in the same screen
 - **Alt+y** - Sort imports (isort)
 
+## Plugins
+
+### Snippets
+
+- **Alt-w** - snippets.Next
+- **Alt-a** - snippets.Accept
+- **Alt-s** - snippets.Insert
+- **Alt-d** - snippets.Cancel
+
+### Manipulator
+
+Run the commands on the command bar **Ctrl+E**
+
+ * `upper`: UPPERCASE
+ * `lower`: lowercase
+ * `reverse`: Reverses
+ * `base64enc`: Base64 encodes
+ * `base64dec`: Base64 decodes
+ * `rot13`: ROT-13
+ * `incNum`: Increase number by one
+ * `decNum`: Decrease number by one
+ * `capital`: Capitalize First Letter
+ * `brace`: Adds brackets around selection
+     * `curly`: Curly brackets (`{ }`)
+     * `square`: Square brackets (`[ ]`)
+	 * `angle`: Angle brackets (`< >`)
+     * `dquote`: Double quotes (`" "`)
+     * `squote`: Single quotes (`' '`)

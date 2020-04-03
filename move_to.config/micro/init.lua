@@ -60,7 +60,7 @@ function new_view(bp)
 end
 
 function output(bp)
-
+    micro.Log("init.lua script output")
     bp:Save()
     local buf = bp.Buf
 
@@ -75,7 +75,7 @@ function output(bp)
 end
 
 function build(bp)
-
+    micro.Log("init.lua build")
     bp:Save()
     local buf = bp.Buf
 
@@ -92,14 +92,16 @@ function build(bp)
 end
 
 function test(bp)
+    micro.Log("init.lua test")
+
     bp:Save()
     local buf = bp.Buf
 
     _command = {}
      _command["go"] = "go test -v " .. buf.Path
     -- TODO: make cargo to run specific file tests
-    _command["rust_"] = "cargo play --test " .. buf.Path
-    _command["rust"] = "cargo test -v --color always "
+    _command["rust"] = "cargo play --test " .. buf.Path
+    -- _command["rust"] = "cargo test -v --color always "
     _command["python"] = "python3 -m pytest -svx " .. buf.Path
 
     -- the true means run in the foreground
@@ -111,6 +113,8 @@ function test(bp)
 end
 
 function format(bp)
+    micro.Log("init.lua format")
+
     local buf = bp.Buf
     local filetype = buf:FileType()
 
@@ -129,6 +133,8 @@ function format(bp)
 end
 
 function sort_imports(bp)
+    micro.Log("init.lua sort_imports")
+
     local buf = bp.Buf
     local filetype = buf:FileType()
 
@@ -146,6 +152,8 @@ function sort_imports(bp)
 end
 
 function repl(bp)
+    micro.Log("init.lua repl")
+
     bp:Save()
     local buf = bp.Buf
 
@@ -163,6 +171,8 @@ function repl(bp)
 end
 
 function lint(bp)
+    micro.Log("init.lua lint")
+
     bp:Save()
     _command = {}
     -- _command["go"] = "go ? " .. buf.Path
@@ -172,6 +182,7 @@ function lint(bp)
 end
 
 function onSave(bp)
+    micro.Log("init.lua onSave")
     sort_imports(bp)
     format(bp)
 
@@ -187,7 +198,24 @@ function onSave(bp)
     return true
 end
 
+function onBufferOpen(buf)
+	local filetype = buf:FileType()
+    micro.Log("Filetype is:" .. filetype)
+    _tabs = {}
+    _tabs["makefile"] = true
+    _tabs["go"] = true
+    _tabs["snippets"] = true
+
+    if not setContains(_tabs, filetype) then
+        buf:SetOption("tabstospaces", "off")
+    else
+        buf:SetOption("tabstospaces", "on")
+    end
+end
+
 function run_action(buf, commands, identifier, bottom_panel)
+
+    micro.Log("init.lua run_action" .. identifier)
 
     local filetype = buf:FileType()
 
@@ -204,8 +232,13 @@ function run_action(buf, commands, identifier, bottom_panel)
 
     if msg ~= "" then
         if bottom_panel then
+            local new_buffer = buffer.NewBuffer(msg, '')
+            -- -- Looks like it is not a good idea to have it readonly
+            -- new_buffer.Settings["filetype"] = filetype
+            -- new_buffer.Settings["readonly"] = true
+            -- new_buffer.Type.Readonly = true
             micro.CurPane():HSplitIndex(
-                buffer.NewBuffer(msg, identifier),
+                new_buffer,
                 true -- means bottom split
             )
         else

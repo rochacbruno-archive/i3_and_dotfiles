@@ -5,6 +5,7 @@
     "Alt-d": "lua:snippets.Cancel",
     "Alt-f": "lua:initlua.format",
     "Alt-i": "lua:initlua.repl",
+    "Alt-j": "lua:joinLines.joinLines",
     "Alt-l": "lua:initlua.lint",
     "Alt-o": "lua:initlua.output",
     "Alt-s": "lua:snippets.Insert",
@@ -14,5 +15,7 @@
     "Alt-|": "lua:initlua.new_view",
     "CtrlBackslash": "VSplit",
     "CtrlRightSq": "lua:initlua.vsplit_left",
-    "F3": "lua:filemanager.toggle_tree"
+    "F3": "lua:filemanager.toggle_tree",
+    "F4": "lua:fzf.fzf",
+    "F5": "lua:wc.wordCount"
 }
